@@ -1,0 +1,4 @@
+# The following file should be excluded from the repo
+/**/.gradle/
+/**/build/
+/**/out/
