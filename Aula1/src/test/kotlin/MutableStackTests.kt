@@ -22,10 +22,6 @@ class MutableStackTests {
         val sut = MutableStack<Int>()
         val otherSut = sut.pop()
 
-        5
-
-        5
-
         sut.push(1)
         sut.push(2)
 
