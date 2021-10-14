@@ -25,7 +25,7 @@ fun getService(): Firestore = FirestoreOptions.getDefaultInstance().service
 
 /**
  * Synchronously gets all root collections.
- * @return the sequence of corresponding document references
+ * @return the sequence of corresponding collection references
  */
 fun Firestore.getRootCollections() = listCollections()
 
@@ -58,3 +58,10 @@ fun Firestore.getDocument(collectionId: String, documentId: String): DocumentSna
     return query.get()
 }
 
+/**
+ * Synchronously gets the given document from this collection.
+ * @return the document snapshot. If the document does not exist, the returned snapshot instance is empty.
+ */
+fun CollectionReference.getDocument(documentId: String): DocumentSnapshot {
+    return this.getDocument(documentId)
+}
