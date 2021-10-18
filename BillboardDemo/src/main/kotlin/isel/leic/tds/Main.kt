@@ -3,17 +3,24 @@ package isel.leic.tds
 import isel.leic.tds.firestore.checkEnvironment
 
 /**
- * The application entry point
+ * The application entry point.
+ *
+ * The application supports the following commands:
+ * GET - Gets all billboard messages
+ * GET <author> - Gets all messages from <author>
+ * POST <message_content> - Post the given message to the billboard
+ * EXIT - Ends the application
  */
 fun main() {
 
     checkEnvironment()
     val author = readLocalUserInfo()
+    val billboard: Billboard = FirestoreBillboard()
 
     while (true) {
         val (command, parameter) = readCommand()
         when (command) {
-            "GET" -> getMessagesFrom(author).print()
+            "GET" -> getMessagesFrom(billboard, author).print()
             "POST" -> TODO()
             else -> println("Invalid command")
         }
