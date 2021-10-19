@@ -1,6 +1,19 @@
 package isel.leic.tds
 
-import isel.leic.tds.firestore.checkEnvironment
+import isel.leic.tds.firestore.checkFirestoreEnvironment
+
+/**
+ * Lecture #5 script
+ *
+ * step 1 - talk about the adoption of MongoDB, instead of using Firestore. Talk about the tools and JDK version
+ * requirements.
+ * step 2 - show dependency to KMongo and file mongodb/utils.kt
+ * step 3 - remove firestore remnants from the demo (dependency, utils file, FirestoreBillboard class)
+ * step 4 - implement Billboard for MongoDB (MongoDbBillboard class) and reiterate the merits of the approach
+ * step 5 - implement remaining commands and tests
+ * step 6 - evaluate current solution with respect to testability
+ * step 7 - design a uniform interface for all commands: Sum type for results (lecture # 6?)
+ */
 
 /**
  * The application entry point.
@@ -13,7 +26,7 @@ import isel.leic.tds.firestore.checkEnvironment
  */
 fun main() {
 
-    checkEnvironment()
+    checkFirestoreEnvironment()
     val author = readLocalUserInfo()
     val billboard: Billboard = FirestoreBillboard()
 

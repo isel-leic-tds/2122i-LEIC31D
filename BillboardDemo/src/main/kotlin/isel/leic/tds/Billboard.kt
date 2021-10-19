@@ -1,5 +1,8 @@
 package isel.leic.tds
 
+/**
+ * The billboard contract
+ */
 interface Billboard {
 
     /**

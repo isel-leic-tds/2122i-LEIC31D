@@ -1,22 +1,28 @@
-package isel.leic.tds
+import isel.leic.tds.Author
+import isel.leic.tds.Billboard
+import isel.leic.tds.Message
+import isel.leic.tds.toAuthor
 
 /**
- * Billboard double for testing purposes
+ * Test double implementation of [Billboard]
  */
 class BillboardStub : Billboard {
 
-    private val messages: MutableMap<Author, List<Message>> = mutableMapOf()
+    val aTestAuthor = "a_test_author".toAuthor()
+    private val anotherTestAuthor = "another_test_author".toAuthor()
 
-    override fun getAllMessages(author: Author) = messages[author] ?: listOf()
-
-    override fun getAllMessages(): Iterable<Message> {
-        TODO("Not yet implemented")
-    }
+    val messages: MutableMap<Author, Iterable<Message>> = mutableMapOf(
+        aTestAuthor to listOf(Message(aTestAuthor, "Hi"), Message(aTestAuthor, "Hi again")),
+        anotherTestAuthor to listOf(Message(anotherTestAuthor, "Hi all")),
+    )
 
     override fun postMessage(message: Message) {
-        val authorMessages = messages[message.author]
-        messages[message.author] =
-            if (authorMessages != null) authorMessages + message
-            else listOf(message)
+        val authorMessages = messages[message.author] ?: emptyList()
+        messages[message.author] = authorMessages + message
     }
+
+    override fun getAllMessages(author: Author) = messages[author] ?: emptyList()
+
+    override fun getAllMessages() = messages.values.flatten()
+
 }

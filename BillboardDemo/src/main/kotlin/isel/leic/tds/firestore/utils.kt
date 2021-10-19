@@ -9,7 +9,7 @@ private const val ENVIRONMENT_VAR = "GOOGLE_APPLICATION_CREDENTIALS"
  * Checks if the application execution environment is correctly specified.
  * @throws IllegalStateException when the environment is invalid
  */
-fun checkEnvironment() {
+fun checkFirestoreEnvironment() {
     val credentialsFileName: String? = System.getenv(ENVIRONMENT_VAR)
     check(!credentialsFileName.isNullOrBlank()) {
         "Provide location of credentials file through $ENVIRONMENT_VAR environment variable"

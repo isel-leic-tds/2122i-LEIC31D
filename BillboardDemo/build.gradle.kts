@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.litote.kmongo:kmongo:4.3.0")
     implementation("com.google.cloud:google-cloud-firestore:3.0.5")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.31")
 }
@@ -21,7 +22,7 @@ tasks.test {
     useJUnit()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
 
