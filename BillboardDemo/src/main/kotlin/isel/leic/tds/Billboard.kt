@@ -21,6 +21,7 @@ interface Billboard {
     /**
      * Posts the given message to the billboard
      * @param message the message to be posted
+     * @return  a boolean value indicating whether the operation succeeded (true) or not (false)
      */
-    fun postMessage(message: Message)
+    fun postMessage(message: Message): Boolean
 }

@@ -1,6 +1,6 @@
 package isel.leic.tds
 
-import isel.leic.tds.firestore.checkFirestoreEnvironment
+import isel.leic.tds.mongodb.createMongoClient
 
 /**
  * Lecture #5 script
@@ -23,12 +23,22 @@ import isel.leic.tds.firestore.checkFirestoreEnvironment
  * GET <author> - Gets all messages from <author>
  * POST <message_content> - Post the given message to the billboard
  * EXIT - Ends the application
+ *
+ * Execution is parameterized through the following environment variables:
+ * - MONGO_DB_NAME, bearing the name of the database to be used
+ * - MONGO_DB_CONNECTION, bearing the connection string to the database server. If absent, the application
+ * uses a local server instance (it must be already running)
  */
 fun main() {
 
-    checkFirestoreEnvironment()
     val author = readLocalUserInfo()
-    val billboard: Billboard = FirestoreBillboard()
+
+    val driver =
+        if (checkEnvironment() == DbMode.REMOTE)
+            createMongoClient(System.getenv(ENV_DB_CONNECTION))
+        else createMongoClient()
+
+    val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
 
     while (true) {
         val (command, parameter) = readCommand()
@@ -73,3 +83,28 @@ private fun Iterable<Message>.print() {
  */
 private fun readln() = readLine()!!
 
+/**
+ * Environment variables
+ */
+private const val ENV_DB_NAME = "MONGO_DB_NAME"
+private const val ENV_DB_CONNECTION = "MONGO_DB_CONNECTION"
+
+/**
+ * Represents the supported execution modes:
+ *  LOCAL   - The database server is running locally
+ *  REMOTE  - The database server is running remotely
+ */
+private enum class DbMode { LOCAL, REMOTE }
+
+/**
+ * Verifies the execution environment to determine the execution mode
+ * @return the execution mode
+ */
+private fun checkEnvironment(): DbMode {
+    requireNotNull(System.getenv(ENV_DB_NAME)) {
+        "You must specify the environment variable $ENV_DB_NAME"
+    }
+
+    return if (System.getenv(ENV_DB_CONNECTION) != null) DbMode.REMOTE
+    else DbMode.LOCAL
+}
