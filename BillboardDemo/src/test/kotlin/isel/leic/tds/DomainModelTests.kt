@@ -33,4 +33,11 @@ class DomainModelTests {
             BLANK_STRING.toAuthor()
         }
     }
+
+    @Test
+    fun `bad stuff happens`() {
+        assertFailsWith<IllegalArgumentException> {
+            "palb p".toAuthor()
+        }
+    }
 }

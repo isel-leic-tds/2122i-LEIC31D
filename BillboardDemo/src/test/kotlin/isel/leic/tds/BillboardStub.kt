@@ -16,9 +16,10 @@ class BillboardStub : Billboard {
         anotherTestAuthor to listOf(Message(anotherTestAuthor, "Hi all")),
     )
 
-    override fun postMessage(message: Message) {
+    override fun postMessage(message: Message): Boolean {
         val authorMessages = messages[message.author] ?: emptyList()
         messages[message.author] = authorMessages + message
+        return true
     }
 
     override fun getAllMessages(author: Author) = messages[author] ?: emptyList()

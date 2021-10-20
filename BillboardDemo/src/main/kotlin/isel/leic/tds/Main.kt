@@ -31,22 +31,42 @@ import isel.leic.tds.mongodb.createMongoClient
  */
 fun main() {
 
-    val author = readLocalUserInfo()
-
     val driver =
         if (checkEnvironment() == DbMode.REMOTE)
             createMongoClient(System.getenv(ENV_DB_CONNECTION))
         else createMongoClient()
 
-    val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
+    try {
+        // TODO: Improve user interaction to give feedback regarding validity of user id
+        val author = readLocalUserInfo()
+        val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
+        // val dispatcher = buildCommands()
 
-    while (true) {
-        val (command, parameter) = readCommand()
-        when (command) {
-            "GET" -> getMessagesFrom(billboard, author).print()
-            "POST" -> TODO()
-            else -> println("Invalid command")
+        while (true) {
+
+            val (command, parameter) = readCommand()
+            /*
+            val action = dispatcher[command.uppercase()]
+            if (action == null) println("Invalid command")
+            else action(parameter)
+             */
+
+            when (command.uppercase()) {
+                "GET" -> (
+                    if (parameter != null) billboard.getAllMessages(Author(parameter))
+                    else billboard.getAllMessages()
+                ).print()
+                "POST" ->
+                    if (parameter != null) billboard.postMessage(Message(author, parameter))
+                    else println("POST command requires a parameter")
+                "EXIT" -> { println("Exiting ..."); return }
+                else -> println("Invalid command")
+            }
         }
+    }
+    finally {
+        println("Closing driver ...")
+        driver.close();
     }
 }
 
