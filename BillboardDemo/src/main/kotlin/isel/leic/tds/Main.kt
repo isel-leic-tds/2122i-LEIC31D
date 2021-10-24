@@ -3,16 +3,19 @@ package isel.leic.tds
 import isel.leic.tds.mongodb.createMongoClient
 
 /**
- * Lecture #5 script
+ * Lecture #6 script
  *
- * step 1 - talk about the adoption of MongoDB, instead of using Firestore. Talk about the tools and JDK version
- * requirements.
- * step 2 - show dependency to KMongo and file mongodb/utils.kt
- * step 3 - remove firestore remnants from the demo (dependency, utils file, FirestoreBillboard class)
- * step 4 - implement Billboard for MongoDB (MongoDbBillboard class) and reiterate the merits of the approach
- * step 5 - implement remaining commands and tests
- * step 6 - evaluate current solution with respect to testability
- * step 7 - design a uniform interface for all commands: Sum type for results (lecture # 6?)
+ * Goal: Design a uniform interface for all commands with Unit return type
+ * step 1 - using the classic OO approach: NinetiesCommand interface and its top level class implementations
+ * step 2 - provide overload for invoke operator (https://kotlinlang.org/docs/operator-overloading.html#invoke-operator)
+ * step 3 - using object expressions (https://kotlinlang.org/docs/object-declarations.html)
+ * step 4 - using functions and partial function application
+ *
+ * Goal: Refine the design so that the return type is no longer Unit, thereby making commands also usable in a GUI
+ * application (lecture #7 ?)
+ * step 5 - Start by dealing with the exit command (enum with OK and EXIT)
+ * step 6 - Add support for the returned value: closed hierarchy (sum type) - Result, ExitResult and SuccessResult<T>
+ * ...
  */
 
 /**

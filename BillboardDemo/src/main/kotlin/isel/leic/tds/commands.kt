@@ -1,6 +1,5 @@
 package isel.leic.tds
 
-
 typealias Command = (String?) -> Unit
 
 fun buildCommands(): Map<String, Command> {
