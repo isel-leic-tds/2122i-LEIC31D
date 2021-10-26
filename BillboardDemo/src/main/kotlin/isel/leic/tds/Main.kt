@@ -43,28 +43,15 @@ fun main() {
         // TODO: Improve user interaction to give feedback regarding validity of user id
         val author = readLocalUserInfo()
         val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
-        // val dispatcher = buildCommands()
+        //val dispatcher = buildNinetiesCommands(billboard, author)
+        val dispatcher = buildCommands(billboard, author)
+        println(dispatcher)
 
         while (true) {
-
             val (command, parameter) = readCommand()
-            /*
             val action = dispatcher[command.uppercase()]
             if (action == null) println("Invalid command")
             else action(parameter)
-             */
-
-            when (command.uppercase()) {
-                "GET" -> (
-                    if (parameter != null) billboard.getAllMessages(Author(parameter))
-                    else billboard.getAllMessages()
-                ).print()
-                "POST" ->
-                    if (parameter != null) billboard.postMessage(Message(author, parameter))
-                    else println("POST command requires a parameter")
-                "EXIT" -> { println("Exiting ..."); return }
-                else -> println("Invalid command")
-            }
         }
     }
     finally {
@@ -92,13 +79,6 @@ private fun readCommand(): Pair<String, String?> {
     val command = input.substringBefore(delimiter = ' ')
     val argument = input.substringAfter(delimiter = ' ', missingDelimiterValue = "").trim()
     return Pair(command.trim(), if (argument.isNotBlank()) argument else null)
-}
-
-/**
- * Extension method used to print this sequence of [Message] instances to the console.
- */
-private fun Iterable<Message>.print() {
-    forEach { println(it) }
 }
 
 /**

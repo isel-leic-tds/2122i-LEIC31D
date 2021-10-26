@@ -39,3 +39,10 @@ fun String.toAuthorOrNull() = if (isValidAuthorIdentifier(this)) Author(this) el
  */
 private fun isValidAuthorIdentifier(id: String) = id.isNotEmpty() && id.all { !it.isWhitespace() }
 
+
+/**
+ * Extension method used to print this sequence of [Message] instances to the console.
+ */
+fun Iterable<Message>.print() {
+    forEach { println(it) }
+}

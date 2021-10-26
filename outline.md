@@ -84,10 +84,12 @@
 * Creating an infrastructure for dispatching the execution of the application's commands
   * Using an associative container that associates user entered strings to the corresponding command implementation
 * Implementation of the supported commands:
+  * [Using an Object-Oriented style: interface and implementing classes](https://kotlinlang.org/docs/interfaces.html)
+    * [Object expressions](https://kotlinlang.org/docs/object-declarations.html)
+    * [Overloading invoke operator](https://kotlinlang.org/docs/operator-overloading.html#invoke-operator)
   * Using functions and partial function application
-  * Using interface inheritance
 * For reference: 
-  * [Video lecture (in Portuguese)](coming soon) 
+  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=75DGDRN68lM&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=6)
 
 ### 27/10/2021 - Laboratory 
 * Practical class dedicated to the course's project

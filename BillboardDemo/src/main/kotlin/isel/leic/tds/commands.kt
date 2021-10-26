@@ -1,9 +1,24 @@
 package isel.leic.tds
 
+import kotlin.system.exitProcess
+
+/**
+ * Contract to be supported by all commands. Noticw that commands are mere functions =)
+ */
 typealias Command = (String?) -> Unit
 
-fun buildCommands(): Map<String, Command> {
-    return mapOf("EXIT" to { })
+/**
+ * Gets the container bearing the associations between user entered strings and the corresponding command implementation.
+ * @param billboard the [Billboard] to be used by all commands
+ * @param author    the [Author] instance to be used when posting messages
+ * @return the container with the command mappings
+ */
+fun buildCommands(billboard: Billboard, author: Author): Map<String, Command> {
+    return mapOf(
+        "EXIT" to { exit() },
+        "POST" to { postMessage(billboard, author, it) },
+        "GET"  to { getAllMessages(billboard, it)}
+    )
 }
 
 private fun postMessage(billboard: Billboard, author: Author, parameter: String?) {
@@ -12,6 +27,12 @@ private fun postMessage(billboard: Billboard, author: Author, parameter: String?
 }
 
 private fun getAllMessages(billboard: Billboard, parameter: String?) {
-    if (parameter != null) billboard.getAllMessages(Author(parameter))
-    else billboard.getAllMessages()
+    val messages =
+        if (parameter != null) billboard.getAllMessages(Author(parameter))
+        else billboard.getAllMessages()
+    messages.print()
+}
+
+private fun exit() {
+    exitProcess(0)
 }
