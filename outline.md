@@ -94,3 +94,11 @@
 ### 27/10/2021 - Laboratory 
 * Practical class dedicated to the course's project
 
+## Week 5
+### 01/11/2021 - National holliday
+
+### 03/11/2021 - Laboratory
+* Practical class dedicated to the course's project
+
+## Week 6
+

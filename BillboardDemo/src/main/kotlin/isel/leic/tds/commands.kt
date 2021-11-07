@@ -3,7 +3,7 @@ package isel.leic.tds
 import kotlin.system.exitProcess
 
 /**
- * Contract to be supported by all commands. Noticw that commands are mere functions =)
+ * Contract to be supported by all commands. Notice that commands are mere functions =)
  */
 typealias Command = (String?) -> Unit
 
@@ -21,11 +21,22 @@ fun buildCommands(billboard: Billboard, author: Author): Map<String, Command> {
     )
 }
 
+/**
+ * Implementation of the POST command
+ * @param billboard the [Billboard] instance to be used
+ * @param author    the post author
+ * @param parameter the command's parameter
+ */
 private fun postMessage(billboard: Billboard, author: Author, parameter: String?) {
     if (parameter != null) billboard.postMessage(Message(author, parameter))
     else println("POST command requires a parameter")
 }
 
+/**
+ * Implementation of the GET command.
+ * @param billboard the [Billboard] instance to be used
+ * @param parameter the command's parameter, or null if no parameter has been provided
+ */
 private fun getAllMessages(billboard: Billboard, parameter: String?) {
     val messages =
         if (parameter != null) billboard.getAllMessages(Author(parameter))
@@ -33,6 +44,9 @@ private fun getAllMessages(billboard: Billboard, parameter: String?) {
     messages.print()
 }
 
+/**
+ * Implementation of the EXIT command.
+ */
 private fun exit() {
     exitProcess(0)
 }

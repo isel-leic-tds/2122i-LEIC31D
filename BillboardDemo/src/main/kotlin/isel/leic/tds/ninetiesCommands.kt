@@ -4,7 +4,6 @@ import kotlin.system.exitProcess
 
 /**
  * Contract to be supported by all commands (an Object-Oriented style)
- * TODO: implement invoke on [NinetiesCommand]
  */
 interface NinetiesCommand {
     /**
@@ -45,6 +44,8 @@ private class ExitCommand : NinetiesCommand {
 
 /**
  * Implementation of the POST command
+ * @param billboard the [Billboard] instance to be used
+ * @param author    the post author
  */
 private class PostCommand(
     private val billboard: Billboard,
@@ -64,6 +65,7 @@ private class PostCommand(
 
 /**
  * Implementation of the GET command
+ * @param billboard the [Billboard] instance to be used
  */
 private class GetCommand(private val billboard: Billboard): NinetiesCommand {
     override fun execute(parameter: String?) {

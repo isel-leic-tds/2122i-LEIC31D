@@ -3,19 +3,24 @@ package isel.leic.tds
 import isel.leic.tds.mongodb.createMongoClient
 
 /**
- * Lecture #6 script
+ * Lecture #7 script (Single Responsibility Principle)
  *
- * Goal: Design a uniform interface for all commands with Unit return type
- * step 1 - using the classic OO approach: NinetiesCommand interface and its top level class implementations
- * step 2 - provide overload for invoke operator (https://kotlinlang.org/docs/operator-overloading.html#invoke-operator)
- * step 3 - using object expressions (https://kotlinlang.org/docs/object-declarations.html)
- * step 4 - using functions and partial function application
- *
- * Goal: Refine the design so that the return type is no longer Unit, thereby making commands also usable in a GUI
- * application (lecture #7 ?)
- * step 5 - Start by dealing with the exit command (enum with OK and EXIT)
- * step 6 - Add support for the returned value: closed hierarchy (sum type) - Result, ExitResult and SuccessResult<T>
- * ...
+ * Goal: Complete the billboard console application
+ * step 1 - review the solution so far. Identify the solutions elements' and reassert their nature and purpose:
+ *  - Data and application specific behaviour (a.k.a. domain model and domain logic), I/O (storage), user interface.
+ * step 2 - Make the same exercise for the project assignment
+ * step 3 - revisit the domain logic implemented with a classical Object-Oriented approach (NinetiesCommand hierarchy)
+ * step 4 - Critical analysis: the DRY principle is not being observed in the NinetiesCommand hierarchy
+ *  - implement invoke operator at the NinetiesCommand interface, thereby eliminating the repetition
+ * step 5 - Refactor the OOP approach to use, instead of named implementations,
+ *  - object expressions (https://kotlinlang.org/docs/object-declarations.html)
+ *  - SAM conversions, by turning the NinetiesCommand interface into a SAM interface (https://kotlinlang.org/docs/fun-interfaces.html)
+ * step 6 - Refine the design so that the return type is no longer Unit, thereby making commands also usable in a GUI
+ * (and testable, and respectful of the Single Responsibility Principle
+ * step 6.1 - Start by dealing with the exit command (enum with CONTINUE and EXIT)
+ * step 6.2 - Add support for the returned value: closed hierarchy (sum type) - Result, ExitResult and SuccessResult<T>
+ *  - (https://kotlinlang.org/docs/sealed-classes.html)
+ * step 7 - Revisit the function based approach (with partial function application)
  */
 
 /**
@@ -43,8 +48,9 @@ fun main() {
         // TODO: Improve user interaction to give feedback regarding validity of user id
         val author = readLocalUserInfo()
         val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
-        //val dispatcher = buildNinetiesCommands(billboard, author)
-        val dispatcher = buildCommands(billboard, author)
+
+        val dispatcher = buildNinetiesCommands(billboard, author)
+        //val dispatcher = buildCommands(billboard, author)
         println(dispatcher)
 
         while (true) {
