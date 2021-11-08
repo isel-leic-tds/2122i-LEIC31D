@@ -1,5 +1,6 @@
 package isel.leic.tds
 
+import isel.leic.tds.commands.Result
 import isel.leic.tds.mongodb.createMongoClient
 
 /**
@@ -57,7 +58,11 @@ fun main() {
             val (command, parameter) = readCommand()
             val action = dispatcher[command.uppercase()]
             if (action == null) println("Invalid command")
-            else action(parameter)
+            else {
+                val result = action(parameter)
+                if (result == Result.EXIT)
+                    break
+            }
         }
     }
     finally {

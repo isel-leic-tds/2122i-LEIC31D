@@ -1,21 +1,22 @@
 package isel.leic.tds
 
+import isel.leic.tds.commands.Result
 import kotlin.system.exitProcess
 
 /**
  * Contract to be supported by all commands (an Object-Oriented style)
  */
-interface NinetiesCommand {
+fun interface NinetiesCommand {
     /**
      * Executes this command passing it the given parameter
      * @param parameter the commands parameter, or null, if no parameter has been passed
      */
-    fun execute(parameter: String?)
+    fun execute(parameter: String?): Result
 
     /**
      * Overload of invoke operator, for convenience.
      */
-    operator fun invoke(parameter: String? = null)
+    operator fun invoke(parameter: String? = null) = execute(parameter)
 }
 
 /**
@@ -36,10 +37,7 @@ fun buildNinetiesCommands(billboard: Billboard, author: Author) : Map<String, Ni
  * Implementation of the EXIT command
  */
 private class ExitCommand : NinetiesCommand {
-    override fun execute(parameter: String?) {
-        exitProcess(0)
-    }
-    override fun invoke(parameter: String?) = execute(parameter)
+    override fun execute(parameter: String?) = Result.EXIT
 }
 
 /**
@@ -51,16 +49,15 @@ private class PostCommand(
     private val billboard: Billboard,
     private val author: Author) : NinetiesCommand {
 
-    override fun execute(parameter: String?) {
+    override fun execute(parameter: String?): Result {
         if (parameter == null)
             println("POST must receive a non empty message")
         else {
             billboard.postMessage(Message(author, parameter))
             println("Message posted")
         }
+        return Result.CONTINUE
     }
-
-    override fun invoke(parameter: String?) = execute(parameter)
 }
 
 /**
@@ -68,13 +65,12 @@ private class PostCommand(
  * @param billboard the [Billboard] instance to be used
  */
 private class GetCommand(private val billboard: Billboard): NinetiesCommand {
-    override fun execute(parameter: String?) {
+    override fun execute(parameter: String?): Result {
         val messages =
             if(parameter != null) billboard.getAllMessages(Author(parameter))
             else billboard.getAllMessages()
 
         messages.print()
+        return Result.CONTINUE
     }
-
-    override fun invoke(parameter: String?) = execute(parameter)
 }
