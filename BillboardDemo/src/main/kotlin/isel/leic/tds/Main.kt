@@ -1,27 +1,21 @@
 package isel.leic.tds
 
-import isel.leic.tds.commands.Result
+import isel.leic.tds.commands.ExitResult
+import isel.leic.tds.commands.ValueResult
+import isel.leic.tds.commands.buildNinetiesCommands
 import isel.leic.tds.mongodb.createMongoClient
 
 /**
- * Lecture #7 script (Single Responsibility Principle)
+ * Lecture #8 script (Sum types)
  *
- * Goal: Complete the billboard console application
- * step 1 - review the solution so far. Identify the solutions elements' and reassert their nature and purpose:
- *  - Data and application specific behaviour (a.k.a. domain model and domain logic), I/O (storage), user interface.
- * step 2 - Make the same exercise for the project assignment
- * step 3 - revisit the domain logic implemented with a classical Object-Oriented approach (NinetiesCommand hierarchy)
- * step 4 - Critical analysis: the DRY principle is not being observed in the NinetiesCommand hierarchy
- *  - implement invoke operator at the NinetiesCommand interface, thereby eliminating the repetition
- * step 5 - Refactor the OOP approach to use, instead of named implementations,
- *  - object expressions (https://kotlinlang.org/docs/object-declarations.html)
- *  - SAM conversions, by turning the NinetiesCommand interface into a SAM interface (https://kotlinlang.org/docs/fun-interfaces.html)
- * step 6 - Refine the design so that the return type is no longer Unit, thereby making commands also usable in a GUI
- * (and testable, and respectful of the Single Responsibility Principle
- * step 6.1 - Start by dealing with the exit command (enum with CONTINUE and EXIT)
- * step 6.2 - Add support for the returned value: closed hierarchy (sum type) - Result, ExitResult and SuccessResult<T>
- *  - (https://kotlinlang.org/docs/sealed-classes.html)
- * step 7 - Revisit the function based approach (with partial function application)
+ * Goal: Creating a uniform interface for commands. Refine the design so that the return type is no longer Unit,
+ * thereby making commands also usable in a GUI (and testable, and respectful of the Single Responsibility Principle)
+ * step 1 - Start by dealing with the exit command (enum with CONTINUE and EXIT)
+ *  - enum classes (https://kotlinlang.org/docs/enum-classes.html)
+ * step 2 - Add support for the returned value: closed hierarchy - Result, ExitResult and ValueResult<T>
+ *  - sealed classes (https://kotlinlang.org/docs/sealed-classes.html)
+ * step 3 - Revisit the function based approach (with partial function application) and refactor it to use the new
+ * result representation
  */
 
 /**
@@ -47,21 +41,22 @@ fun main() {
 
     try {
         // TODO: Improve user interaction to give feedback regarding validity of user id
-        val author = readLocalUserInfo()
         val billboard: Billboard = MongoDbBillboard(driver.getDatabase(System.getenv(ENV_DB_NAME)))
-
+        val author = readLocalUserInfo()
         val dispatcher = buildNinetiesCommands(billboard, author)
         //val dispatcher = buildCommands(billboard, author)
-        println(dispatcher)
+        val views = buildViews()
 
         while (true) {
             val (command, parameter) = readCommand()
-            val action = dispatcher[command.uppercase()]
+            val action = dispatcher[command]
             if (action == null) println("Invalid command")
             else {
                 val result = action(parameter)
-                if (result == Result.EXIT)
-                    break
+                when (result) {
+                    is ExitResult -> break
+                    is ValueResult<*> -> views[command]?.invoke(result.data)
+                }
             }
         }
     }
@@ -89,7 +84,7 @@ private fun readCommand(): Pair<String, String?> {
     val input = readln()
     val command = input.substringBefore(delimiter = ' ')
     val argument = input.substringAfter(delimiter = ' ', missingDelimiterValue = "").trim()
-    return Pair(command.trim(), if (argument.isNotBlank()) argument else null)
+    return Pair(command.trim().uppercase(), if (argument.isNotBlank()) argument else null)
 }
 
 /**

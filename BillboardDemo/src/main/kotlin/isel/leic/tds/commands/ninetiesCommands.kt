@@ -1,7 +1,8 @@
-package isel.leic.tds
+package isel.leic.tds.commands
 
-import isel.leic.tds.commands.Result
-import kotlin.system.exitProcess
+import isel.leic.tds.Author
+import isel.leic.tds.Billboard
+import isel.leic.tds.Message
 
 /**
  * Contract to be supported by all commands (an Object-Oriented style)
@@ -37,7 +38,7 @@ fun buildNinetiesCommands(billboard: Billboard, author: Author) : Map<String, Ni
  * Implementation of the EXIT command
  */
 private class ExitCommand : NinetiesCommand {
-    override fun execute(parameter: String?) = Result.EXIT
+    override fun execute(parameter: String?) = ExitResult
 }
 
 /**
@@ -47,16 +48,12 @@ private class ExitCommand : NinetiesCommand {
  */
 private class PostCommand(
     private val billboard: Billboard,
-    private val author: Author) : NinetiesCommand {
+    private val author: Author
+) : NinetiesCommand {
 
-    override fun execute(parameter: String?): Result {
-        if (parameter == null)
-            println("POST must receive a non empty message")
-        else {
-            billboard.postMessage(Message(author, parameter))
-            println("Message posted")
-        }
-        return Result.CONTINUE
+    override fun execute(parameter: String?): ValueResult<Boolean> {
+        requireNotNull(parameter)
+        return ValueResult(billboard.postMessage(Message(author, parameter)))
     }
 }
 
@@ -65,12 +62,8 @@ private class PostCommand(
  * @param billboard the [Billboard] instance to be used
  */
 private class GetCommand(private val billboard: Billboard): NinetiesCommand {
-    override fun execute(parameter: String?): Result {
-        val messages =
+    override fun execute(parameter: String?) = ValueResult(
             if(parameter != null) billboard.getAllMessages(Author(parameter))
             else billboard.getAllMessages()
-
-        messages.print()
-        return Result.CONTINUE
-    }
+        )
 }
