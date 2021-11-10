@@ -101,4 +101,30 @@
 * Practical class dedicated to the course's project
 
 ## Week 6
+### 08/11/2021 - Single Responsibility Principle
+* Considerations on software design
+  * Design principles identified thusfar:
+    * [Don't Repeat Yourself (DRY)](http://wiki.c2.com/?DontRepeatYourself)
+    * Single Responsibility Principle (SRP)
+      * [@wiki.c2](https://wiki.c2.com/?SingleResponsibilityPrinciple)
+      * [@Clean.Coder.Blog](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)
+  * Critical analysis of the Billboard Application in light of these principles
+* Kotlin language constructs:
+  * [Interface](https://kotlinlang.org/docs/interfaces.html)
+  * [Object expressions](https://kotlinlang.org/docs/object-declarations.html)
+  * [SAM interfaces and SAM conversions](https://kotlinlang.org/docs/fun-interfaces.html)
+* For reference: 
+  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=lsxpggQ_QpE&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=7)
 
+### 10/11/2021
+* Part 1 - Sum types in Kotlin
+  * Refactoring commands design to no longer violate the Single Responsibility Principle
+    * Using enum classes and asserting its inadequacy to the problem at hand
+    * Using a closed hierarchy (Kotlin's approach to sum types)
+  * Kotlin language constructs:
+    * [Object declarations](https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview)
+    * [Enum classes](https://kotlinlang.org/docs/enum-classes.html)
+    * [Sealed classes](https://kotlinlang.org/docs/sealed-classes.html)
+* Part 2 - Laboratory: Practical class dedicated to the course's project 
+* For reference:
+  * Video lecture (in Portuguese) (_coming soon_)
