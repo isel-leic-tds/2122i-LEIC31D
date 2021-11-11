@@ -1,4 +1,4 @@
-package isel.leic.tds.mongodb
+package isel.leic.tds.storage.mongodb
 
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoCollection

@@ -1,4 +1,4 @@
-package isel.leic.tds.commands
+package isel.leic.tds.domain.commands
 
 /**
  * Sum type used to represent the execution result of the existing commands

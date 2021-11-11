@@ -1,10 +1,12 @@
-package isel.leic.tds
+package isel.leic.tds.storage
 
 import com.mongodb.client.MongoDatabase
-import isel.leic.tds.mongodb.createDocument
-import isel.leic.tds.mongodb.getAll
-import isel.leic.tds.mongodb.getCollectionWithId
-import isel.leic.tds.mongodb.getRootCollectionsIds
+import isel.leic.tds.domain.Author
+import isel.leic.tds.domain.Message
+import isel.leic.tds.storage.mongodb.createDocument
+import isel.leic.tds.storage.mongodb.getAll
+import isel.leic.tds.storage.mongodb.getCollectionWithId
+import isel.leic.tds.storage.mongodb.getRootCollectionsIds
 
 /**
  * Implementation of a [Billboard] backed by a MongoDB instance.

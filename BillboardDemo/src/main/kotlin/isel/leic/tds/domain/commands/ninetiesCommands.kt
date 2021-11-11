@@ -1,8 +1,8 @@
-package isel.leic.tds.commands
+package isel.leic.tds.domain.commands
 
-import isel.leic.tds.Author
-import isel.leic.tds.Billboard
-import isel.leic.tds.Message
+import isel.leic.tds.domain.Author
+import isel.leic.tds.domain.Message
+import isel.leic.tds.storage.Billboard
 
 /**
  * Contract to be supported by all commands (an Object-Oriented style)

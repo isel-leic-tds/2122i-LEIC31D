@@ -1,6 +1,5 @@
-package isel.leic.tds
+package isel.leic.tds.domain
 
-import BillboardStub
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

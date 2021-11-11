@@ -1,4 +1,4 @@
-package isel.leic.tds
+package isel.leic.tds.domain
 
 /**
  * Represents billboard messages.
@@ -37,4 +37,4 @@ fun String.toAuthorOrNull() = if (isValidAuthorIdentifier(this)) Author(this) el
  * @param   id  the string to be checked
  * @return  true if [id] can be used as an author identifier, false otherwise
  */
-private fun isValidAuthorIdentifier(id: String) = id.isNotEmpty() && id.all { !it.isWhitespace() }
+fun isValidAuthorIdentifier(id: String) = id.isNotEmpty() && id.all { !it.isWhitespace() }

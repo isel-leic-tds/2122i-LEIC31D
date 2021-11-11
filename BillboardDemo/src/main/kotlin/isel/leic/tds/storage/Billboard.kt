@@ -1,4 +1,7 @@
-package isel.leic.tds
+package isel.leic.tds.storage
+
+import isel.leic.tds.domain.Author
+import isel.leic.tds.domain.Message
 
 /**
  * The billboard contract

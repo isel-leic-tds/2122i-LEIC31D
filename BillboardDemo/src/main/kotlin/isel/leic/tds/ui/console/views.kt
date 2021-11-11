@@ -1,5 +1,7 @@
 package isel.leic.tds
 
+import isel.leic.tds.domain.Message
+
 /**
  * Extension method used to print this sequence of [Message] instances to the console.
  */

@@ -1,7 +1,6 @@
-import isel.leic.tds.Author
-import isel.leic.tds.Billboard
-import isel.leic.tds.Message
-import isel.leic.tds.toAuthor
+package isel.leic.tds.domain
+
+import isel.leic.tds.storage.Billboard
 
 /**
  * Test double implementation of [Billboard]
