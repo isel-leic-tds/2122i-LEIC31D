@@ -2,11 +2,7 @@ package isel.leic.tds
 
 import isel.leic.tds.domain.commands.ExitResult
 import isel.leic.tds.domain.commands.ValueResult
-import isel.leic.tds.domain.commands.buildNinetiesCommands
-import isel.leic.tds.storage.Billboard
-import isel.leic.tds.storage.DbMode
-import isel.leic.tds.storage.MongoDbBillboard
-import isel.leic.tds.storage.getDBConnectionInfo
+import isel.leic.tds.storage.*
 import isel.leic.tds.storage.mongodb.createMongoClient
 import isel.leic.tds.ui.console.readCommand
 import isel.leic.tds.ui.console.readLocalUserInfo
@@ -48,22 +44,25 @@ fun main() {
     try {
         val billboard: Billboard = MongoDbBillboard(driver.getDatabase(dbInfo.dbName))
         val author = readLocalUserInfo()
-        val dispatcher = buildNinetiesCommands(billboard, author)
+        val dispatcher = buildNinetyHandlers(billboard, author)
         //val dispatcher = buildCommands(billboard, author)
-        val views = buildViews()
 
         while (true) {
             val (command, parameter) = readCommand()
-            val action = dispatcher[command]
-            if (action == null) println("Invalid command")
+            val handler = dispatcher[command]
+            if (handler == null) println("Invalid command")
             else {
-                val result = action(parameter)
-                when (result) {
+                when (val result = handler.action(parameter)) {
                     is ExitResult -> break
-                    is ValueResult<*> -> views[command]?.invoke(result.data)
+                    is ValueResult<*> -> handler.display(result.data)
                 }
             }
         }
+    }
+    catch (e: BillboardAccessException) {
+        println("An unknown error occurred while trying to reach the database. " +
+                if (dbInfo.mode == DbMode.REMOTE) "Check your network connection."
+                else "Is your local database started?")
     }
     finally {
         println("Closing driver ...")

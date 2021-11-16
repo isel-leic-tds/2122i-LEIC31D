@@ -21,23 +21,9 @@ fun interface NinetiesCommand {
 }
 
 /**
- * Gets the container bearing the associations between user entered strings and the corresponding command implementation.
- * @param billboard the [Billboard] to be used by all commands
- * @param author    the [Author] instance to be used when posting messages
- * @return the container with the command mappings
- */
-fun buildNinetiesCommands(billboard: Billboard, author: Author) : Map<String, NinetiesCommand> {
-    return mapOf(
-        "EXIT" to ExitCommand(),
-        "POST" to PostCommand(billboard, author),
-        "GET" to GetCommand(billboard)
-    )
-}
-
-/**
  * Implementation of the EXIT command
  */
-private class ExitCommand : NinetiesCommand {
+class ExitCommand : NinetiesCommand {
     override fun execute(parameter: String?) = ExitResult
 }
 
@@ -46,7 +32,7 @@ private class ExitCommand : NinetiesCommand {
  * @param billboard the [Billboard] instance to be used
  * @param author    the post author
  */
-private class PostCommand(
+class PostCommand(
     private val billboard: Billboard,
     private val author: Author
 ) : NinetiesCommand {
@@ -61,7 +47,7 @@ private class PostCommand(
  * Implementation of the GET command
  * @param billboard the [Billboard] instance to be used
  */
-private class GetCommand(private val billboard: Billboard): NinetiesCommand {
+class GetCommand(private val billboard: Billboard): NinetiesCommand {
     override fun execute(parameter: String?) = ValueResult(
             if(parameter != null) billboard.getAllMessages(Author(parameter))
             else billboard.getAllMessages()

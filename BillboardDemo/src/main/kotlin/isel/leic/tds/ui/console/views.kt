@@ -15,22 +15,9 @@ fun Iterable<Message>.print() {
 typealias View = (input: Any?) -> Unit
 
 /**
- * Gets the container bearing the associations between user entered strings and the functions that display
- * the results of the corresponding commands.
- * @return the container with the command identifier to view mappings
- */
-fun buildViews(): Map<String, View> {
-    return mapOf(
-        "EXIT" to { },
-        "POST" to ::postView,
-        "GET" to ::getView
-    )
-}
-
-/**
  * Displays the result of GET command executions
  */
-private fun getView(input: Any?) {
+fun getView(input: Any?) {
     val messages = input as Iterable<Message>
     messages.print()
 }
@@ -38,7 +25,7 @@ private fun getView(input: Any?) {
 /**
  * Displays the result of POST command executions
  */
-private fun postView(input: Any?) {
+fun postView(input: Any?) {
     val success = input as Boolean
     println(
         if (success) "Message posted!"
