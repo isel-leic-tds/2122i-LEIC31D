@@ -4,6 +4,9 @@ import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
 import org.litote.kmongo.KMongo
+import org.litote.kmongo.MongoOperator
+import org.litote.kmongo.findOneById
+import org.litote.kmongo.updateOneById
 
 /**
  * Creates an instance of the mongo db client driver. The instance must be closed when no longer needed.
@@ -58,3 +61,22 @@ fun <T> MongoCollection<T>.createDocument(document: T): Boolean = this.insertOne
  * @return  the documents in the collection
  */
 fun <T> MongoCollection<T>.getAll(): Iterable<T> = this.find()
+
+/**
+ * Extension function of [MongoCollection<T>] that returns the document, in this collection, identified by [id].
+ * The generic parameter <T> is the type of the documents contained in the collection.
+ *
+ * @return  the document or null if no document identified by [id] exists
+ */
+fun <T> MongoCollection<T>.getDocument(id: String): T? = this.findOneById(id)
+
+/**
+ * Extension function of [MongoCollection<T>] that updates the document, in this collection, identified by [id] with
+ * the given [content]
+ * The generic parameter <T> is the type of the documents contained in the collection.
+ *
+ * @param   content            the object bearing the document data
+ * @return  a boolean value indicating if the update was successful (true), or not (false)
+ */
+inline fun <reified T : Any> MongoCollection<T>.updateDocument(id: String, content: T): Boolean =
+    updateOneById(id, content).wasAcknowledged()
