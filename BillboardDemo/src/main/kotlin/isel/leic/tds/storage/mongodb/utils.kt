@@ -3,10 +3,7 @@ package isel.leic.tds.storage.mongodb
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
-import org.litote.kmongo.KMongo
-import org.litote.kmongo.MongoOperator
-import org.litote.kmongo.findOneById
-import org.litote.kmongo.updateOneById
+import org.litote.kmongo.*
 
 /**
  * Creates an instance of the mongo db client driver. The instance must be closed when no longer needed.
@@ -30,6 +27,8 @@ inline fun <reified T : Any> MongoDatabase.getCollectionWithId(id: String): Mong
 /**
  * Extension function of [MongoDatabase] that creates a document with [document] contents and adds it to the collection
  * identified by [parentCollectionId]. The generic parameter <T> is the type of the document to be created.
+ * If the [document] contains a [_id] property of type String, it will be used as a document identifier, otherwise one
+ * will be automatically generated.
  *
  * @param   parentCollectionId  the identifier of the collection where the document will be created
  * @param   document            the object bearing the document data
@@ -71,12 +70,13 @@ fun <T> MongoCollection<T>.getAll(): Iterable<T> = this.find()
 fun <T> MongoCollection<T>.getDocument(id: String): T? = this.findOneById(id)
 
 /**
- * Extension function of [MongoCollection<T>] that updates the document, in this collection, identified by [id] with
- * the given [content]
+ * Extension function of [MongoCollection<T>] that updates the given [document] in this collection. The document instance
+ * must contain a [_id] of type [String], containing the document's identifier.
  * The generic parameter <T> is the type of the documents contained in the collection.
  *
- * @param   content            the object bearing the document data
+ * @param   document            the object bearing the document data
  * @return  a boolean value indicating if the update was successful (true), or not (false)
  */
-inline fun <reified T : Any> MongoCollection<T>.updateDocument(id: String, content: T): Boolean =
-    updateOneById(id, content).wasAcknowledged()
+inline fun <reified T : Any> MongoCollection<T>.updateDocument(document: T): Boolean =
+    this.replaceOne(document).wasAcknowledged()
+
