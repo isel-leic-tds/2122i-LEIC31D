@@ -1,4 +1,4 @@
-package isel.leic.tds
+package isel.leic.tds.ui.console
 
 import isel.leic.tds.domain.Message
 

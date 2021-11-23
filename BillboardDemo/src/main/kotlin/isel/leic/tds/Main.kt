@@ -8,16 +8,25 @@ import isel.leic.tds.ui.console.readCommand
 import isel.leic.tds.ui.console.readLocalUserInfo
 
 /**
- * Lecture #9 script (Finishing up the Billboard console application design)
+ * Lecture #10 script
  *
- * Goal: Finishing up the Billboard console application design.
- * step 0 - talk about the current solution structure
- * step 1 - The association between user entered strings and commands and views doesn't respect the DRY principle. The
- * knowledge of which string corresponds to which command is repeated. Let's fix this!
- * step 2 - Error handling: errors deserve to be modeled.
- * step 3 - Revisit the function based approach (with partial function application) and refactor it to use the new
+ * Goal: Finishing up the Billboard console application design. For real! =)
+ * step 0 - revisit the current solution structure
+ * step 1 - Revisit the function based approach (with partial function application) and refactor it to use the new
  * result representation.
- * step 4 - Revisit DB data model and related code. Implement a couple of e2e tests.
+ *  step 1.1 - Talk about partial application using a simple example (multiply and multiplyBy2)
+ *  step 1.2 - Revisit the function based approach for the commands' implementations
+ * step 2 - Handle errors in commands (i.e. Invalid arguments). Create "error views" for the commands.
+ * step 3 - Make minor cosmetic improvements:
+ *  step 3.1 - Factor out tryBillboardAccess function in MongoDbBillboard
+ *  step 3.2 - Use MongoClient's use method (inherited from Closeable) in main
+ *  step 3.3 - Use ifBlank in readCommand function (userInput module)
+ * step 4 - Testing our design in the light of the Open-Closed Principle
+ *  step 4.1 - Add the user command, which displays the id of the current user
+ *  step 4.2 - Add logging of command execution time:
+ *      - With the Decorator design pattern (nineties commands)
+ *      - With function composition (function based commands)
+ * step 5 - Finish up by writing some more tests, including integration tests.
  */
 
 /**

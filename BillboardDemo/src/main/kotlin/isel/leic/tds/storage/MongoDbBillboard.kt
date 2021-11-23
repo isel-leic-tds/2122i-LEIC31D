@@ -4,10 +4,7 @@ import com.mongodb.MongoException
 import com.mongodb.client.MongoDatabase
 import isel.leic.tds.domain.Author
 import isel.leic.tds.domain.Message
-import isel.leic.tds.storage.mongodb.createDocument
-import isel.leic.tds.storage.mongodb.getAll
-import isel.leic.tds.storage.mongodb.getCollectionWithId
-import isel.leic.tds.storage.mongodb.getRootCollectionsIds
+import isel.leic.tds.storage.mongodb.*
 
 /**
  * Implementation of a [Billboard] backed by a MongoDB instance.
@@ -33,6 +30,7 @@ class MongoDbBillboard(private val db: MongoDatabase) : Billboard {
      * @throws [BillboardAccessException] when unable to reach the underlying DB
      */
     override fun getAllMessages(): Iterable<Message> {
+        val message = db.getCollectionWithId<Message>("iss").getDocument("asas")
         try {
             return db.getRootCollectionsIds().flatMap {
                 getAllMessages(Author(it))

@@ -3,6 +3,7 @@ package isel.leic.tds
 import isel.leic.tds.domain.Author
 import isel.leic.tds.domain.Message
 import isel.leic.tds.storage.Billboard
+import isel.leic.tds.ui.console.print
 import kotlin.system.exitProcess
 
 /**
