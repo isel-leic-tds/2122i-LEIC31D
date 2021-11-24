@@ -54,8 +54,8 @@ fun main() {
         try {
             val billboard: Billboard = MongoDbBillboard(driver.getDatabase(dbInfo.dbName))
             val author = readLocalUserInfo()
-            val dispatcher = buildNinetyHandlers(billboard, author)
-            //val dispatcher = buildCommands(billboard, author)
+            //val dispatcher = buildNinetyHandlers(billboard, author)
+            val dispatcher = buildHandlers(billboard, author)
 
             while (true) {
                 val (command, parameter) = readCommand()

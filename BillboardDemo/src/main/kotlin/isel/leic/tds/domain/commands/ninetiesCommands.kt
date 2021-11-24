@@ -53,3 +53,24 @@ class GetCommand(private val billboard: Billboard): NinetiesCommand {
             else billboard.getAllMessages()
         )
 }
+
+/**
+ * Implementation of the USER command
+ * @param user the logged-in user
+ */
+class UserCommand(private val user: Author): NinetiesCommand {
+    override fun execute(parameter: String?): ValueResult<String> = ValueResult(user.id)
+}
+
+/**
+ * Used to add logging information to the commands execution
+ * @param decorated the command whose execution is to be logged
+ */
+class LogExecutionTime(private val decorated: NinetiesCommand): NinetiesCommand {
+    override fun execute(parameter: String?): Result {
+        val start = System.currentTimeMillis()
+        val result = decorated(parameter)
+        println("Executed in ${System.currentTimeMillis() - start} ms")
+        return result
+    }
+}

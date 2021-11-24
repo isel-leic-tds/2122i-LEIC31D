@@ -10,6 +10,17 @@ import isel.leic.tds.storage.Billboard
 typealias Command = (String?) -> Result
 
 /**
+ * Used to add logging information to the commands execution
+ * @param decorated the command whose execution is to be logged
+ */
+fun log(decorated: Command): Command = {
+        val start = System.currentTimeMillis()
+        val result = decorated(it)
+        println("Executed in ${System.currentTimeMillis() - start} ms")
+        result
+    }
+
+/**
  * Implementation of the POST command
  * @param billboard the [Billboard] instance to be used
  * @param author    the post author
@@ -36,3 +47,8 @@ fun getAllMessages(billboard: Billboard, parameter: String?): ValueResult<Iterab
  * Implementation of the EXIT command.
  */
 fun exit() = ExitResult
+
+/**
+ * Implementation of the USER command.
+ */
+fun getUserId(author: Author): ValueResult<String> = ValueResult(author.id)

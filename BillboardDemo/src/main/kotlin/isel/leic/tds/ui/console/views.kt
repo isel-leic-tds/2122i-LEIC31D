@@ -41,3 +41,11 @@ fun postView(input: Any?) {
 fun postErrorView(exception: CommandException) {
     println("POST command must receive a parameter with the meesage to be posted")
 }
+
+/**
+ * Displays the result of USER command executions
+ */
+fun userView(input: Any?) {
+    val userID = input as String
+    println("Current user id is = $userID")
+}
