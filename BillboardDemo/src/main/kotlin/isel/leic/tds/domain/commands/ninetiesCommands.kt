@@ -38,7 +38,7 @@ class PostCommand(
 ) : NinetiesCommand {
 
     override fun execute(parameter: String?): ValueResult<Boolean> {
-        requireNotNull(parameter)
+        if (parameter == null) throw CommandException()
         return ValueResult(billboard.postMessage(Message(author, parameter)))
     }
 }
@@ -48,7 +48,7 @@ class PostCommand(
  * @param billboard the [Billboard] instance to be used
  */
 class GetCommand(private val billboard: Billboard): NinetiesCommand {
-    override fun execute(parameter: String?) = ValueResult(
+    override fun execute(parameter: String?): ValueResult<Iterable<Message>> = ValueResult(
             if(parameter != null) billboard.getAllMessages(Author(parameter))
             else billboard.getAllMessages()
         )

@@ -15,3 +15,5 @@ object ExitResult : Result()
  * Result produced when the command execution yields a value
  */
 class ValueResult<T>(val data: T) : Result()
+
+class CommandException(cause: Exception? = null): Exception(cause)

@@ -25,7 +25,7 @@ fun readCommand(): Pair<String, String?> {
     val input = readln()
     val command = input.substringBefore(delimiter = ' ')
     val argument = input.substringAfter(delimiter = ' ', missingDelimiterValue = "").trim()
-    return Pair(command.trim().uppercase(), if (argument.isNotBlank()) argument else null)
+    return Pair(command.trim().uppercase(), argument.ifBlank { null })
 }
 
 /**

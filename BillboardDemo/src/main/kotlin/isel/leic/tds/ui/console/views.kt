@@ -1,6 +1,8 @@
 package isel.leic.tds.ui.console
 
 import isel.leic.tds.domain.Message
+import isel.leic.tds.domain.commands.CommandException
+import java.lang.Exception
 
 /**
  * Extension method used to print this sequence of [Message] instances to the console.
@@ -31,4 +33,11 @@ fun postView(input: Any?) {
         if (success) "Message posted!"
         else "Something went wrong"
     )
+}
+
+/**
+ * Displays the error message related to the POST command executions
+ */
+fun postErrorView(exception: CommandException) {
+    println("POST command must receive a parameter with the meesage to be posted")
 }

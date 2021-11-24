@@ -1,5 +1,6 @@
 package isel.leic.tds
 
+import isel.leic.tds.domain.commands.CommandException
 import isel.leic.tds.domain.commands.ExitResult
 import isel.leic.tds.domain.commands.ValueResult
 import isel.leic.tds.storage.*
@@ -44,37 +45,42 @@ import isel.leic.tds.ui.console.readLocalUserInfo
  * uses a local server instance (it must be already running)
  */
 fun main() {
-
     val dbInfo = getDBConnectionInfo()
     val driver =
         if (dbInfo.mode == DbMode.REMOTE) createMongoClient(dbInfo.connectionString)
         else createMongoClient()
 
-    try {
-        val billboard: Billboard = MongoDbBillboard(driver.getDatabase(dbInfo.dbName))
-        val author = readLocalUserInfo()
-        val dispatcher = buildNinetyHandlers(billboard, author)
-        //val dispatcher = buildCommands(billboard, author)
+    driver.use {
+        try {
+            val billboard: Billboard = MongoDbBillboard(driver.getDatabase(dbInfo.dbName))
+            val author = readLocalUserInfo()
+            val dispatcher = buildNinetyHandlers(billboard, author)
+            //val dispatcher = buildCommands(billboard, author)
 
-        while (true) {
-            val (command, parameter) = readCommand()
-            val handler = dispatcher[command]
-            if (handler == null) println("Invalid command")
-            else {
-                when (val result = handler.action(parameter)) {
-                    is ExitResult -> break
-                    is ValueResult<*> -> handler.display(result.data)
+            while (true) {
+                val (command, parameter) = readCommand()
+                val handler = dispatcher[command]
+                if (handler == null) println("Invalid command")
+                else {
+                    try {
+                        when (val result = handler.action(parameter)) {
+                            is ExitResult -> break
+                            is ValueResult<*> -> handler.display(result.data)
+                        }
+                    }
+                    catch (e: CommandException) {
+                        handler.errorDisplay(e)
+                    }
                 }
             }
         }
-    }
-    catch (e: BillboardAccessException) {
-        println("An unknown error occurred while trying to reach the database. " +
-                if (dbInfo.mode == DbMode.REMOTE) "Check your network connection."
-                else "Is your local database started?")
-    }
-    finally {
-        println("Closing driver ...")
-        driver.close()
+        catch (e: BillboardAccessException) {
+            println("An unknown error occurred while trying to reach the database. " +
+                    if (dbInfo.mode == DbMode.REMOTE) "Check your network connection."
+                    else "Is your local database started?")
+        }
+        finally {
+            println("Closing driver...")
+        }
     }
 }
