@@ -15,7 +15,7 @@
   * [Classes](https://kotlinlang.org/docs/classes.html)
   * [Properties](https://kotlinlang.org/docs/properties.html)
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=xQeBuUmZB5Q&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=1)
+  * [Video lecture (in Portuguese)](https://youtu.be/xQeBuUmZB5Q)
 
 ## Week 2
 ### 11/10/2021 - Dealing with mutable state
@@ -29,7 +29,7 @@
   * [Encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
   * [Seriouslsy Good Software, by Marco Faella - Chapter 5](https://www.manning.com/books/seriously-good-software?gclid=Cj0KCQjw5JSLBhCxARIsAHgO2Sfco_i6rtgxyOsDnsCbtP4RbxLIkcF0w_QEdZYvHpoc5trlc0rk_sYaApJ-EALw_wcB)
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=MVNYKxsWh-4&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=2)
+  * [Video lecture (in Portuguese)](https://youtu.be/MVNYKxsWh-4)
 
 ### 13/10/2021 - The Billboard Application
 * Live coding session: design and implementation of the Billboard console application
@@ -51,7 +51,7 @@
   * [Designing with types: Single case union types](https://fsharpforfunandprofit.com/posts/designing-with-types-single-case-dus/)
   * [Designing with types: Making illegal states unrepresentable](https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/)
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=eCp0hZ9jxJ0&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=3)
+  * [Video lecture (in Portuguese)](https://youtu.be/eCp0hZ9jxJ0)
 
 ## Week 3
 ### 18/10/2021 - Dynamic binding
@@ -63,7 +63,7 @@
   * Consequences on the software's design: making dependencies explicit
   * [Test doubles: introduction](https://martinfowler.com/bliki/TestDouble.html)
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=zI3h7YgYEMU&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=4)
+  * [Video lecture (in Portuguese)](https://youtu.be/zI3h7YgYEMU)
 
 ### 20/10/2021 - The Billboard Application, continued
 * Live coding session: design and implementation of the Billboard console application
@@ -73,7 +73,7 @@
 * Mongo DB as an alternative do Firestore
   * Motivation
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=G_emzTPBVVQ&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=5) 
+  * [Video lecture (in Portuguese)](https://youtu.be/G_emzTPBVVQ) 
   * [Local Mongo DB instalation](https://docs.mongodb.com/manual/administration/install-community/)
   * [Getting started with Mongo DB Atlas](https://www.mongodb.com/cloud/atlas/register)
   * [Mongo DB Compass](https://www.mongodb.com/products/compass)
@@ -89,7 +89,7 @@
     * [Overloading invoke operator](https://kotlinlang.org/docs/operator-overloading.html#invoke-operator)
   * Using functions and partial function application
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=75DGDRN68lM&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=6)
+  * [Video lecture (in Portuguese)](https://youtu.be/75DGDRN68lM)
 
 ### 27/10/2021 - Laboratory 
 * Practical class dedicated to the course's project
@@ -114,7 +114,7 @@
   * [Object expressions](https://kotlinlang.org/docs/object-declarations.html)
   * [SAM interfaces and SAM conversions](https://kotlinlang.org/docs/fun-interfaces.html)
 * For reference: 
-  * [Video lecture (in Portuguese)](https://www.youtube.com/watch?v=lsxpggQ_QpE&list=PL8XxoCaL3dBh9aZK9m1WxCC-EWHx4SXuH&index=7)
+  * [Video lecture (in Portuguese)](https://youtu.be/lsxpggQ_QpE)
 
 ### 10/11/2021
 * Part 1 - Sum types in Kotlin
@@ -127,4 +127,52 @@
     * [Sealed classes](https://kotlinlang.org/docs/sealed-classes.html)
 * Part 2 - Laboratory: Practical class dedicated to the course's project 
 * For reference:
-  * Video lecture (in Portuguese) (_coming soon_)
+  * [Video lecture (in Portuguese)](https://youtu.be/VgEXezI-Zwo)
+
+## Week 7
+### 15/11/2021 - The Billboard Application: error handling
+* Considerations on software design 
+  * Error handling: errors as a first class concept in domain modeling
+    * [Exceptions in Kotlin](https://kotlinlang.org/docs/exceptions.html)
+  * Revisited design principle:
+    * [DRY - Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+* For reference:
+  * [Video lecture (in Portuguese)](https://youtu.be/fZoTteiM5Sg)
+
+### 17/11/2021 - Laboratory 
+* Practical class dedicated to the course's project
+
+## Week 8
+### 22/11/2021
+* There was no lecture
+
+### 24/11/2021 - The Billboard Application: conclusion and critical analisys
+* Considerations on software design 
+  * Using an OOP design style (i.e. through inheritance)
+  * Using a style based in function composition (i.e. through higher-order functions and partial application)
+* Testing the Billboard Application design in the light of the [Open-Closed Principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)
+  * By adding a new command (i.e. the user command, which displays the id of the current user)
+  * By adding support for logging command execution time
+* Design patterns: concept and purpose
+  * [The Decorator design pattern](https://en.wikipedia.org/wiki/Decorator_pattern), applied to the Billboard Application
+  * [The Command design pattern](https://en.wikipedia.org/wiki/Command_pattern), applied to the Billboard Application
+  * Comparison with the function based approach: function composition =)
+* For reference:
+  * [Video lecture (in Portuguese)](https://youtu.be/8mUWK3p52w4)
+
+## Week 9
+### 29/11/2021 - Desktop Compose: Introduction
+* Desktop Compose: [getting started](https://github.com/JetBrains/compose-jb/tree/master/tutorials/Getting_Started)
+* Programming model
+  * @Composable functions: State -> @Composable -> UI
+  * First rule of @Composable functions: A @Composable function can only be called from other @Composable functions (they are "colored")
+* Execution model
+  * For @Composable functions
+  * For UI event handling
+  * Threading model for event-driven execution environments
+* For reference:
+  * [IntelliJ plugin for @Composable preview](https://plugins.jetbrains.com/plugin/16541-compose-multiplatform-ide-support)
+  * [What color is your function](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)
+  * [Video lecture (in Portuguese)](https://youtu.be/Xfocm9cqpjo)
+
+### 01/12/2021 - National Holliday
