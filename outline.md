@@ -176,3 +176,14 @@
   * [Video lecture (in Portuguese)](https://youtu.be/Xfocm9cqpjo)
 
 ### 01/12/2021 - National Holliday
+
+## Week 10
+### 06/12/2021 - Desktop Compose: Layouts
+* Desktop Compose: Composing a UI
+  * Displaying [text](https://foso.github.io/Jetpack-Compose-Playground/foundation/text/), [images](https://foso.github.io/Jetpack-Compose-Playground/foundation/image/) resources and background colors
+  * [Layouts](https://developer.android.com/jetpack/compose/layouts/basics)
+* For reference:
+  * [Compose Playground](https://foso.github.io/Jetpack-Compose-Playground/)
+  * [Video lecture (in Portuguese)](https://youtu.be/ffJuOL6ZH90)
+
+### 08/12/2021 - National Holliday
