@@ -77,7 +77,7 @@
   * [Local Mongo DB instalation](https://docs.mongodb.com/manual/administration/install-community/)
   * [Getting started with Mongo DB Atlas](https://www.mongodb.com/cloud/atlas/register)
   * [Mongo DB Compass](https://www.mongodb.com/products/compass)
-  * [Using KMongo][https://litote.org/kmongo/quick-start/#with-the-sync-driver]
+  * [Using KMongo](https://litote.org/kmongo/quick-start/#with-the-sync-driver)
 
 ## Week 4
 ### 25/10/2021 - The Billboard Application, continued
@@ -187,3 +187,22 @@
   * [Video lecture (in Portuguese)](https://youtu.be/ffJuOL6ZH90)
 
 ### 08/12/2021 - National Holliday
+
+## Week 11
+### 13/12/2021 - Desktop Compose: mental model
+* Desktop Compose: mental model
+  * Rules for composable functions: purpose and motivation
+  * [Thinking in Compose](https://developer.android.com/jetpack/compose/mental-model)
+* Desktop Compose: [state managment](https://developer.android.com/jetpack/compose/state#state-and-composition)
+  * Building blocks: `remember` and `mutableStateOf`
+* For reference:
+  * Video lecture (in Portuguese) (__coming soon__)
+
+### 13/12/2021 - The Model View Controller pattern (__preview__)
+* Designing an interactive application with Desktop Compose: Tic-Tac-Toe
+* The Model View Controller design pattern:
+  * Purpose and motivation
+  * Dependencies' constraints
+  * Data flow
+* For reference:
+  * Video lecture (in Portuguese) (__coming soon__)

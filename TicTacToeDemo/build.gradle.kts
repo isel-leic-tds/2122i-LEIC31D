@@ -29,7 +29,7 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "Aula12"
+            packageName = "TicTacToeDemo"
             packageVersion = "1.0.0"
         }
     }
