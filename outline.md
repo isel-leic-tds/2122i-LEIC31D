@@ -200,7 +200,7 @@
 
 ### 13/12/2021 - The Model View Controller pattern (__preview__)
 * Designing an interactive application with Desktop Compose: Tic-Tac-Toe
-* The Model View Controller design pattern:
+* The [Model View Controller](http://wiki.c2.com/?ModelViewController) design pattern
   * Purpose and motivation
   * Dependencies' constraints
   * Data flow
