@@ -212,6 +212,7 @@
 * Kotlin language constructs:
   * [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html)
   * [Extensions](https://kotlinlang.org/docs/extensions.html)
+  * [Equality](https://kotlinlang.org/docs/equality.html)
 * For reference:
   * Video lecture (in Portuguese) (__coming soon__)
   * [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
