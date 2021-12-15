@@ -198,11 +198,20 @@
 * For reference:
   * Video lecture (in Portuguese) (__coming soon__)
 
-### 13/12/2021 - The Model View Controller pattern (__preview__)
+### 13/12/2021 - The Model View Controller pattern
 * Designing an interactive application with Desktop Compose: Tic-Tac-Toe
-* The [Model View Controller](http://wiki.c2.com/?ModelViewController) design pattern
-  * Purpose and motivation
-  * Dependencies' constraints
-  * Data flow
+  * The big idea: the [Model View Controller](http://wiki.c2.com/?ModelViewController) design pattern
+    * Purpose and motivation
+    * Dependencies' constraints
+    * Data flow
+  * The not that big ideas =) (but essential, nevertheless)
+    * Valuing of immutability
+    * Minimalistic public surface of software artifacts
+    * Hiding implementation details and thereby promoting modularity
+    * Increasing expressivness through type extensions
+* Kotlin language constructs:
+  * [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html)
+  * [Extensions](https://kotlinlang.org/docs/extensions.html)
 * For reference:
   * Video lecture (in Portuguese) (__coming soon__)
+  * [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
