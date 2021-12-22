@@ -196,23 +196,23 @@
 * Desktop Compose: [state managment](https://developer.android.com/jetpack/compose/state#state-and-composition)
   * Building blocks: `remember` and `mutableStateOf`
 * For reference:
-  * Video lecture (in Portuguese) (__coming soon__)
+  * [Video lecture (in Portuguese)](https://youtu.be/RKis8f2-R74)
 
-### 13/12/2021 - The Model View Controller pattern
+### 15/12/2021 - The Model View Controller pattern
 * Designing an interactive application with Desktop Compose: Tic-Tac-Toe
   * The big idea: the [Model View Controller](http://wiki.c2.com/?ModelViewController) design pattern
     * Purpose and motivation
     * Dependencies' constraints
     * Data flow
+  * Another big ideia: valuing of immutability 
   * The not that big ideas =) (but essential, nevertheless)
-    * Valuing of immutability
     * Minimalistic public surface of software artifacts
     * Hiding implementation details and thereby promoting modularity
-    * Increasing expressivness through type extensions
+    * Increasing expressiveness through type extensions
 * Kotlin language constructs:
   * [Operator overloading](https://kotlinlang.org/docs/operator-overloading.html)
   * [Extensions](https://kotlinlang.org/docs/extensions.html)
   * [Equality](https://kotlinlang.org/docs/equality.html)
 * For reference:
-  * Video lecture (in Portuguese) (__coming soon__)
+  * [Video lecture (in Portuguese)](https://youtu.be/fEIYisNhr0E)
   * [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
