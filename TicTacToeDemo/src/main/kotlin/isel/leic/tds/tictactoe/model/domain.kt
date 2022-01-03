@@ -25,7 +25,7 @@ enum class Player {
 data class Board internal constructor(
     val side: Int = TIC_TAC_TOE_SIDE,
     val turn: Player? = Player.CIRCLE,
-    private val board: List<Player?> = List(size = TIC_TAC_TOE_SIDE * TIC_TAC_TOE_SIDE, init = { null })
+    private val board: List<Player?> = List(size = TIC_TAC_TOE_TILE_COUNT, init = { null })
 ) {
 
     companion object {
@@ -66,7 +66,10 @@ data class Board internal constructor(
     }
 
     /**
-     * Converts this instance to a list of moves.
+     * Converts the board to a list of player moves.
+     *
+     * @return the list of player moves. The list size is always TIC_TAC_TOE_TILE_COUNT and empty board tiles are
+     * represented with null.
      */
     fun toList(): List<Player?> = board
 }

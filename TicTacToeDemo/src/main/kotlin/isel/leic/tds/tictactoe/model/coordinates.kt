@@ -6,6 +6,11 @@ package isel.leic.tds.tictactoe.model
 const val TIC_TAC_TOE_SIDE = 3
 
 /**
+ * The Tic-Tac-Toe's number of tiles.
+ */
+const val TIC_TAC_TOE_TILE_COUNT = TIC_TAC_TOE_SIDE * TIC_TAC_TOE_SIDE
+
+/**
  * Checks whether [value] is a valid row index
  */
 fun isValidRow(value: Int) = value in 0 until TIC_TAC_TOE_SIDE
@@ -55,7 +60,7 @@ data class Coordinate(val row: Row, val column: Column)
 /**
  * Checks whether [value] is an index that may express a valid board coordinate
  */
-fun isInCoordinateRange(value: Int) = value < TIC_TAC_TOE_SIDE * TIC_TAC_TOE_SIDE
+fun isInCoordinateRange(value: Int) = value < TIC_TAC_TOE_TILE_COUNT
 
 /**
  * Extension function thaht converts this coordinate to a one dimensional index
