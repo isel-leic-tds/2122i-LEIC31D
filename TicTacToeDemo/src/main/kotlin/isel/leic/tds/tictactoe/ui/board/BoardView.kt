@@ -1,4 +1,4 @@
-package isel.leic.tds.tictactoe.ui
+package isel.leic.tds.tictactoe.ui.board
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,16 +15,16 @@ import isel.leic.tds.tictactoe.model.*
  * @param onTileSelected the function called when a tile is selected
  */
 @Composable
-fun BoardView(board: Board, onTileSelected: (Player?, coordinate: Coordinate) -> Unit) {
+fun BoardView(board: Board, onTileSelected: (Player?, Row, Column) -> Unit) {
     val lineThickness = 8.dp
     Column(modifier = Modifier.background(Color.Black)) {
         repeat(board.side) { rowIndex ->
             Row {
                 repeat(board.side) { count ->
+                    val row = rowIndex.toRow()
+                    val column = count.toColumn()
                     val tile = board[rowIndex.Row, count.Column]
-                    Tile(tile, onSelected = {
-                        onTileSelected(it, Coordinate(rowIndex.Row, count.Column))
-                    })
+                    TileImageView(tile , onSelected = { onTileSelected(it, row, column) })
                     if (count < board.side - 1)
                         Spacer(modifier = Modifier.width(lineThickness))
                 }

@@ -17,7 +17,6 @@ fun isValidRow(value: Int) = value in 0 until TIC_TAC_TOE_SIDE
 
 /**
  * Represents a row index in a Tic-Tac-Toe board.
- *
  * @param value the row index. Must be in the interval 0 <= value < [TIC_TAC_TOE_SIDE]
  */
 data class Row(val value: Int) {
@@ -27,20 +26,20 @@ data class Row(val value: Int) {
 /**
  * Int extensions for expressing row indexes.
  */
+fun Int.toRowOrNull() = if (isValidRow(this)) Row(this) else null
 fun Int.toRow() = Row(this)
 val Int.Row
-    get() = toRow()
+    get(): Row = toRow()
 
 /**
  * Checks whether [value] is a valid column index
  */
-fun isValidColumn(value: Int) = value in 0 until TIC_TAC_TOE_SIDE
+fun isValidColumn(value: Int) = value < TIC_TAC_TOE_SIDE
 
 /**
  * Represents a column index in a Tic-Tac-Toe board.
  * @param value the row number. Must be in the interval 0 <= value < [TIC_TAC_TOE_SIDE]
  */
-
 data class Column(val value: Int) {
     init { require(isValidColumn(value)) }
 }
@@ -48,31 +47,23 @@ data class Column(val value: Int) {
 /**
  * Int extensions for expressing column indexes
  */
-fun Int.Column() = Column(this)
+fun Int.toColumn() = Column(this)
+fun Int.toColumnOrNull() = if (isValidColumn(this)) Column(this) else null
 val Int.Column
-    get() = Column()
+    get(): Column = toColumn()
 
 /**
  * Represents coordinates in the Tic-Tac-Toe board
  */
-data class Coordinate(val row: Row, val column: Column)
+data class Coordinate(val row: Row, val column: Column) {
+    constructor(value: Int) : this((value / TIC_TAC_TOE_SIDE).Row, (value % TIC_TAC_TOE_SIDE).Column)
+    fun toIndex() = row.value * TIC_TAC_TOE_SIDE + column.value
+}
 
-/**
- * Checks whether [value] is an index that may express a valid board coordinate
- */
 fun isInCoordinateRange(value: Int) = value < TIC_TAC_TOE_TILE_COUNT
 
-/**
- * Extension function thaht converts this coordinate to a one dimensional index
- */
-fun Coordinate.toIndex() = row.value * TIC_TAC_TOE_SIDE + column.value
-
-/**
- * Int extensions for expressing board coordinates
- */
-fun Int.toCoordinate() = Coordinate((this / TIC_TAC_TOE_SIDE).Row, (this % TIC_TAC_TOE_SIDE).Column)
-fun Int.toCoordinateOrNull() = if (isInCoordinateRange(this)) toCoordinate() else null
+fun Int.toCoordinate() = Coordinate(this)
+fun Int.toCoordinateOrNull() = if (isInCoordinateRange(this)) Coordinate(this) else null
 val Int.Coordinate
     get(): Coordinate = toCoordinate()
-
 
