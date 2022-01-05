@@ -1,4 +1,4 @@
-package isel.leic.tds.tictactoe.model
+package isel.leic.tds.tictactoe.domain
 
 /**
  * The Tic-Tac-Toe's board side

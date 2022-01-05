@@ -1,4 +1,4 @@
-package isel.leic.tds.tictactoe.model
+package isel.leic.tds.tictactoe.domain
 
 /**
  * Enumeration type used to represent the game's players.

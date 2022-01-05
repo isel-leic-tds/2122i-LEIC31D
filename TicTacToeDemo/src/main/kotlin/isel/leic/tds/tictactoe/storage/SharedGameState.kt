@@ -1,18 +1,18 @@
 package isel.leic.tds.tictactoe.storage
 
-import isel.leic.tds.tictactoe.model.Board
-import isel.leic.tds.tictactoe.model.Player
-import isel.leic.tds.tictactoe.model.TIC_TAC_TOE_TILE_COUNT
+import isel.leic.tds.tictactoe.domain.Board
+import isel.leic.tds.tictactoe.domain.Player
+import isel.leic.tds.tictactoe.domain.TIC_TAC_TOE_TILE_COUNT
 
 /**
  * Defines Tic-tac-toe game state, as stored in the shared repository.
  */
-data class GameState(val turn: Player?, val moves: String)
+data class SharedGameState(val turn: Player?, val moves: String)
 
 /**
- * Extension function that maps this Board instance to its corresponding [GameState] representation
+ * Extension function that maps this Board instance to its corresponding [SharedGameState] representation
  */
-fun Board.toGameState(): GameState {
+fun Board.toSharedGameState(): SharedGameState {
     val moves = toList().map {
         when(it) {
             null -> ' '
@@ -20,7 +20,7 @@ fun Board.toGameState(): GameState {
             Player.CIRCLE -> 'O'
         }
     }.joinToString(separator = "")
-    return GameState(turn = this.turn, moves = moves)
+    return SharedGameState(turn = this.turn, moves = moves)
 }
 
 /**
@@ -40,8 +40,8 @@ fun String.toMovesList(): List<Player?> {
 }
 
 /**
- * Extension function that creates a [Board] instance from this [GameState].
+ * Extension function that creates a [Board] instance from this [SharedGameState].
  *
  * @return the list of moves decoded from this string.
  */
-fun GameState.toBoard() = Board(turn = turn, board = moves.toMovesList())
+fun SharedGameState.toBoard() = Board(turn = turn, board = moves.toMovesList())

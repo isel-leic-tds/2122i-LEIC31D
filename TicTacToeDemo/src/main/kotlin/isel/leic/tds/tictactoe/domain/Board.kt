@@ -1,4 +1,4 @@
-package isel.leic.tds.tictactoe.model
+package isel.leic.tds.tictactoe.domain
 
 /**
  * Represents a Tic-Tac-Toe board. Instances are immutable.

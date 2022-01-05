@@ -8,16 +8,15 @@ import androidx.compose.ui.window.FrameWindowScope
 import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
-import isel.leic.tds.tictactoe.model.*
+import isel.leic.tds.tictactoe.domain.*
 import isel.leic.tds.tictactoe.storage.GamesRepository
-import isel.leic.tds.tictactoe.storage.toBoard
-import isel.leic.tds.tictactoe.storage.toGameState
 import isel.leic.tds.tictactoe.ui.board.BoardView
-import java.lang.IllegalStateException
+
+private typealias StartGameAction = (GameId) -> Unit
 
 /**
  * Composable that defines the application's main window. The application state is represented by the
- * [ApplicationState] closed hierarchy.
+ * [Game] closed hierarchy.
  *
  * @param repository        The games' repository
  * @param onCloseRequested  The function to be called when the user intends to close the window
@@ -27,39 +26,44 @@ fun MainWindow(repository: GamesRepository, onCloseRequested: () -> Unit) = Wind
     onCloseRequest = onCloseRequested,
     title = "Tic-Tac-Toe",
     state = WindowState(size = DpSize.Unspecified),
+    resizable = false
 ) {
-    val state = remember { mutableStateOf<ApplicationState>(GameNotStartedState) }
+    val state = remember { mutableStateOf<Game>(GameNotStarted) }
+    val currentState = state.value
 
-    fun makeMove(at: Coordinate): GameStartedState =
-        with(state.value as GameStartedState) {
-            val newState = copy(board = board.makeMove(at))
-            repository.updateOngoingGame("demo_game", newState.board.toGameState())
-            newState
-        }
+    val startGameAction = remember { mutableStateOf<StartGameAction?>(null) }
+    val currentStartGameAction = startGameAction.value
 
-    fun startGame(localPlayer: Player): GameStartedState =
-        GameStartedState(localPlayer = localPlayer, Board(turn = Player.CIRCLE))
-
-    fun refreshGame(): GameStartedState {
-        val game = repository.getOngoingGame("demo_game")
-        val currentState = state.value
-        return if (game != null && currentState is GameStartedState) {
-            currentState.copy(board = game.toBoard())
-        } else throw IllegalStateException()
+    fun startGame(id: GameId) {
+        println("startGame")
+        state.value = (currentState as GameNotStarted).start(repository, Player.CIRCLE, id)
     }
 
-    val currentApplicationState = state.value
-    MainWindowMenu(currentApplicationState,
-        onRefreshRequested = { state.value = refreshGame() },
-        onStartRequested = { state.value = startGame(Player.CIRCLE) },
-        onJoinRequested = { state.value = startGame(Player.CROSS) }
+    fun joinGame(id: GameId) {
+        println("joinGame")
+        state.value = (currentState as GameNotStarted).start(repository, Player.CROSS, id)
+    }
+
+    MainWindowMenu(
+        currentState,
+        onStartRequested = { startGameAction.value = ::startGame },
+        onJoinRequested = { startGameAction.value = ::joinGame },
+        onRefreshRequested = { state.value = (currentState as GameStarted).refresh() },
+        onForfeitRequested = {  } // TODO
     )
 
-    when (currentApplicationState) {
-        is GameNotStartedState -> GameNotStartedContent()
-        is GameStartedState -> GameStartedContent(
-            currentApplicationState,
-            onMoveRequest = { at -> state.value = makeMove(at) },
+    when (currentState) {
+        is GameNotStarted -> GameNotStartedContent()
+        is GameStarted -> GameStartedContent(
+            currentState,
+            onMoveRequest = { at -> state.value = currentState.makeMove(at) },
+        )
+    }
+
+    if (currentStartGameAction != null) {
+        GetGameId(
+            onGameIdEntered = { gameId -> currentStartGameAction.invoke(gameId); startGameAction.value = null },
+            onCancel = { startGameAction.value = null }
         )
     }
 }
@@ -69,19 +73,20 @@ fun MainWindow(repository: GamesRepository, onCloseRequested: () -> Unit) = Wind
  */
 @Composable
 private fun FrameWindowScope.MainWindowMenu(
-    state: ApplicationState,
-    onRefreshRequested: (GameStartedState) -> Unit,
+    state: Game,
+    onRefreshRequested: (GameStarted) -> Unit,
     onStartRequested: () -> Unit,
-    onJoinRequested: () -> Unit
+    onJoinRequested: () -> Unit,
+    onForfeitRequested: () -> Unit
 ) = MenuBar {
 
     data class MenuState(val start: Boolean, val join: Boolean, val refresh: Boolean, val forfeit: Boolean)
 
     val menuState = MenuState(
-        start = state is GameNotStartedState,
-        join = state is GameNotStartedState,
-        refresh = state is GameStartedState && state.localPlayer != state.board.turn,
-        forfeit = state is GameStartedState && state.localPlayer == state.board.turn
+        start = state is GameNotStarted,
+        join = state is GameNotStarted,
+        refresh = state is GameStarted && state.localPlayer != state.board.turn,
+        forfeit = state is GameStarted && state.localPlayer == state.board.turn
     )
 
     Menu("Game") {
@@ -89,16 +94,16 @@ private fun FrameWindowScope.MainWindowMenu(
         Item("Join", enabled = menuState.join, onClick = onJoinRequested)
     }
     Menu("Options") {
-        Item("Refresh", enabled = menuState.refresh, onClick = { onRefreshRequested(state as GameStartedState) })
+        Item("Refresh", enabled = menuState.refresh, onClick = { onRefreshRequested(state as GameStarted) })
         Item("Forfeit", enabled = menuState.forfeit, onClick = { })
     }
 }
 
 /**
- * Composable used to specify the [MainWindow] content when the application is in the [GameStartedState]
+ * Composable used to specify the [MainWindow] content when the application is in the [GameStarted]
  */
 @Composable
-private fun GameStartedContent(state: GameStartedState, onMoveRequest: (at: Coordinate) -> Unit) {
+private fun GameStartedContent(state: GameStarted, onMoveRequest: (at: Coordinate) -> Unit) {
 
     val maybeMakeMove = { tileContent: Player?, row: Row, column: Column ->
         if (tileContent == null && state.localPlayer == state.board.turn) {
@@ -110,24 +115,7 @@ private fun GameStartedContent(state: GameStartedState, onMoveRequest: (at: Coor
 }
 
 /**
- * Composable used to specify the [MainWindow] content when the application is in the [GameNotStartedState]
+ * Composable used to specify the [MainWindow] content when the application is in the [GameNotStarted]
  */
 @Composable
 private fun GameNotStartedContent() = BoardView(Board(), onTileSelected = { _, _, _ -> })
-
-/**
- * Sum type used to define the application's state.
- * @see [GameNotStartedState]
- * @see [GameNotStartedState]
- */
-private sealed class ApplicationState
-
-/**
- * Represents the application state when a game has not yet been started
- */
-private object GameNotStartedState : ApplicationState()
-
-/**
- * Represents the application state when a game has not yet been started
- */
-private data class GameStartedState(val localPlayer: Player, val board: Board) : ApplicationState()

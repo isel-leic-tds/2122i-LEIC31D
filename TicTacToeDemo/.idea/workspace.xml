@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3b9733d0-9a2c-44a2-bc8a-9f882f55c737" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/model/Board.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/domain/Board.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/model/Tile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/domain/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/model/coordinates.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/domain/coordinates.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/GameState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/SharedGameState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/GamesRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/GamesRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/MongoDbGamesRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage/MongoDbGamesRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/MainWindow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/MainWindow.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/board/BoardView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/board/BoardView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/board/Tile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/board/Tile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/isel/leic/tds/tictactoe/model/BoardTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/isel/leic/tds/tictactoe/domain/BoardTests.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +84,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/domain" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -84,6 +92,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/domain" />
       <recent name="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/storage" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">

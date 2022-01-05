@@ -1,4 +1,4 @@
-package isel.leic.tds.tictactoe.model
+package isel.leic.tds.tictactoe.domain
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import isel.leic.tds.tictactoe.model.*
+import isel.leic.tds.tictactoe.domain.*
 
 /**
  * Composable used to display a Tic-Tac-Toe board.

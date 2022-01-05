@@ -11,11 +11,11 @@ interface GamesRepository {
      * @param id    the game identifier
      * @param state the game state
      */
-    fun updateOngoingGame(id: String, state: GameState): Boolean
+    fun updateOngoingGame(id: String, state: SharedGameState): Boolean
 
     /**
      * Gets the game with the given identifier, or null if it doesn't exist.
      * @param id    the game identifier
      */
-    fun getOngoingGame(id: String): GameState?
+    fun getOngoingGame(id: String): SharedGameState?
 }

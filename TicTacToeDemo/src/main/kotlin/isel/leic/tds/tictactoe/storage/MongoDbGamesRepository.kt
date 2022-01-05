@@ -18,7 +18,7 @@ class MongoDbGamesRepository(private val db: MongoDatabase) : GamesRepository {
      * @param id    the game identifier
      * @param state the game state
      */
-    override fun updateOngoingGame(id: String, state: GameState): Boolean {
+    override fun updateOngoingGame(id: String, state: SharedGameState): Boolean {
         return db.getCollectionWithId<GameInfo>(ON_GOING_GAMES_ROOT).updateDocument(GameInfo(id, state))
     }
 
@@ -26,7 +26,7 @@ class MongoDbGamesRepository(private val db: MongoDatabase) : GamesRepository {
      * Gets the game with the given identifier, or null if it doesn't exist.
      * @param id    the game identifier
      */
-    override fun getOngoingGame(id: String): GameState? {
+    override fun getOngoingGame(id: String): SharedGameState? {
         return db.getCollectionWithId<GameInfo>(ON_GOING_GAMES_ROOT).getDocument(id)?.state
     }
 }
@@ -35,5 +35,5 @@ class MongoDbGamesRepository(private val db: MongoDatabase) : GamesRepository {
 /**
  * Defines the contents of documents bearing game state information
  */
-private data class GameInfo(val _id: String, val state: GameState)
+private data class GameInfo(val _id: String, val state: SharedGameState)
 
