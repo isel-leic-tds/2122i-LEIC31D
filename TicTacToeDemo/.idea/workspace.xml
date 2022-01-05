@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b9733d0-9a2c-44a2-bc8a-9f882f55c737" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/model/coordinates.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/model/domain.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/BoardView.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/Tile.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/circle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/circle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cross.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cross.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/isel/leic/tds/tictactoe/BoardTests.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../diagrams/Aula-15.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../diagrams/Aula-15.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/MainWindow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/isel/leic/tds/tictactoe/ui/MainWindow.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

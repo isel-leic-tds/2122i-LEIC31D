@@ -28,7 +28,6 @@ fun MainWindow(repository: GamesRepository, onCloseRequested: () -> Unit) = Wind
     title = "Tic-Tac-Toe",
     state = WindowState(size = DpSize.Unspecified),
 ) {
-    println("Recomposing MainWindow")
     val state = remember { mutableStateOf<ApplicationState>(GameNotStartedState) }
 
     fun makeMove(at: Coordinate): GameStartedState =
@@ -85,7 +84,6 @@ private fun FrameWindowScope.MainWindowMenu(
         forfeit = state is GameStartedState && state.localPlayer == state.board.turn
     )
 
-
     Menu("Game") {
         Item("Start", enabled = menuState.start, onClick = onStartRequested)
         Item("Join", enabled = menuState.join, onClick = onJoinRequested)
@@ -102,13 +100,13 @@ private fun FrameWindowScope.MainWindowMenu(
 @Composable
 private fun GameStartedContent(state: GameStartedState, onMoveRequest: (at: Coordinate) -> Unit) {
 
-    fun maybeMakeMove(tileContent: Player?, row: Row, column: Column) {
+    val maybeMakeMove = { tileContent: Player?, row: Row, column: Column ->
         if (tileContent == null && state.localPlayer == state.board.turn) {
             onMoveRequest(Coordinate(row, column))
         }
     }
 
-    BoardView(state.board, onTileSelected = ::maybeMakeMove)
+    BoardView(state.board, onTileSelected = maybeMakeMove)
 }
 
 /**
