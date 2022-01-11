@@ -216,3 +216,56 @@
 * For reference:
   * [Video lecture (in Portuguese)](https://youtu.be/fEIYisNhr0E)
   * [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
+
+## Week 12
+### 03/01/2022 - Software organization
+* Designing an interactive application with Desktop Compose: Tic-Tac-Toe (continued)
+* The [Model View Controller - (MVC)] (http://wiki.c2.com/?ModelViewController) design pattern, revisited
+* Software organization:
+  * [Layered Architecture](https://en.wikipedia.org/wiki/Multitier_architecture) (sometimes also called multitier architecture)
+  * MVC, a pattern for the Presentation Layer
+* Accessing data: the Repository design pattern
+* Patterns for representing data
+  * [Domain Model](https://martinfowler.com/eaaCatalog/domainModel.html)
+  * [Data Transfer Object](https://martinfowler.com/eaaCatalog/dataTransferObject.html)
+* For reference:    
+  * [Video lecture (in Portuguese)](https://youtu.be/-pgmrXhLEvE)
+  * [Other Description of the DTO pattern](https://www.baeldung.com/java-dto-pattern)
+
+### 05/01/2022 - The Tic-Tac-Toe application with Desktop Compose
+* Designing an interactive application with Desktop Compose: Tic-Tac-Toe (continued)
+* A mental model for Desktop Compose, continued
+  * Stateless @Composables
+  * Statefull @Composables
+    * Characterizing state: application state vs presentation state
+* Considerations on the organization of the presentation layer implemented using Desktop Compose   
+* For reference:    
+  * [Video lecture (in Portuguese)](https://youtu.be/q6jtfl3ij7Q)
+
+
+## Week 13
+### 10/01/2022 - Execution model in Desktop Compose applications
+* Execution in applications that use Desktop Compose, revisited
+  * Threading model for UI event handling: restrictions and consequences
+* Introduction to Kotlin's Coroutines
+  * Purpose and motivation
+  * [Coroutines basics](https://kotlinlang.org/docs/coroutines-basics.html)
+  * Suspending functions
+  * Coroutine builders, corountine scopes and dispatchers (introduction)
+* For reference:    
+  * [Video lecture (in Portuguese)](https://youtu.be/JoeC8PIrvGc)
+  * [Conversation with Pedro Félix about coroutines (in Portuguese)](https://youtu.be/K_fqNQz3UoU)
+
+
+### 12/01/2022 - Fixing the Tic-Tac-Toe application
+* Fixing the Tic-Tac-Toe application
+  1. Dispaching I/O to other threads using the corotines' programming model
+  2. Adding support for periodic refresh
+* Desktop Compose programming model, continued
+  * Building blocks
+    * [rememberCoroutineScope](https://developer.android.com/jetpack/compose/side-effects#remembercoroutinescope)
+    * @Composable [LaunchedEffect](https://developer.android.com/jetpack/compose/side-effects#launchedeffect)
+* Kotlin language constructs:
+  * [Qualified `this@` expressions](https://kotlinlang.org/docs/this-expressions.html)
+* For reference:    
+  * Video lecture (in Portuguese) (__coming soon__)
