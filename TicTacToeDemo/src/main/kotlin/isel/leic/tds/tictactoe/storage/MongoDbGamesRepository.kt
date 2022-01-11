@@ -19,6 +19,7 @@ class MongoDbGamesRepository(private val db: MongoDatabase) : GamesRepository {
      * @param state the game state
      */
     override fun updateOngoingGame(id: String, state: SharedGameState): Boolean {
+        Thread.sleep(3000)
         return db.getCollectionWithId<GameInfo>(ON_GOING_GAMES_ROOT).updateDocument(GameInfo(id, state))
     }
 
@@ -27,6 +28,7 @@ class MongoDbGamesRepository(private val db: MongoDatabase) : GamesRepository {
      * @param id    the game identifier
      */
     override fun getOngoingGame(id: String): SharedGameState? {
+        Thread.sleep(3000)
         return db.getCollectionWithId<GameInfo>(ON_GOING_GAMES_ROOT).getDocument(id)?.state
     }
 }
