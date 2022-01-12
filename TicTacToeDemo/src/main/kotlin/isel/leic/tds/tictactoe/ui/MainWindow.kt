@@ -1,8 +1,6 @@
 package isel.leic.tds.tictactoe.ui
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.window.FrameWindowScope
 import androidx.compose.ui.window.MenuBar
@@ -11,6 +9,8 @@ import androidx.compose.ui.window.WindowState
 import isel.leic.tds.tictactoe.domain.*
 import isel.leic.tds.tictactoe.storage.GamesRepository
 import isel.leic.tds.tictactoe.ui.board.BoardView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private typealias StartGameAction = (GameId) -> Unit
 
@@ -28,27 +28,48 @@ fun MainWindow(repository: GamesRepository, onCloseRequested: () -> Unit) = Wind
     state = WindowState(size = DpSize.Unspecified),
     resizable = false
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
+
     val state = remember { mutableStateOf<Game>(GameNotStarted) }
     val currentState = state.value
+
+    LaunchedEffect(currentState) {
+        println("Launching effect")
+        while (true) {
+            print("$currentState")
+            if (currentState is GameStarted && !currentState.isLocalPlayerTurn()) {
+                state.value = (currentState as GameStarted).refresh()
+            }
+            delay(5_000)
+        }
+    }
 
     val startGameAction = remember { mutableStateOf<StartGameAction?>(null) }
     val currentStartGameAction = startGameAction.value
 
     fun startGame(id: GameId) {
-        println("startGame")
-        state.value = (currentState as GameNotStarted).start(repository, Player.CIRCLE, id)
+        coroutineScope.launch {
+            state.value = (currentState as GameNotStarted).start(repository, Player.CIRCLE, id)
+        }
     }
 
     fun joinGame(id: GameId) {
-        println("joinGame")
-        state.value = (currentState as GameNotStarted).start(repository, Player.CROSS, id)
+        coroutineScope.launch {
+            state.value = (currentState as GameNotStarted).start(repository, Player.CROSS, id)
+        }
     }
 
     MainWindowMenu(
         currentState,
         onStartRequested = { startGameAction.value = ::startGame },
         onJoinRequested = { startGameAction.value = ::joinGame },
-        onRefreshRequested = { state.value = (currentState as GameStarted).refresh() },
+        onRefreshRequested = {
+            coroutineScope.launch {
+                println("${Thread.currentThread().name}: onRefreshRequested")
+                state.value = (currentState as GameStarted).refresh()
+            }
+        },
         onForfeitRequested = {  } // TODO
     )
 
@@ -56,7 +77,12 @@ fun MainWindow(repository: GamesRepository, onCloseRequested: () -> Unit) = Wind
         is GameNotStarted -> GameNotStartedContent()
         is GameStarted -> GameStartedContent(
             currentState,
-            onMoveRequest = { at -> state.value = currentState.makeMove(at) },
+            onMoveRequest = { at ->
+                coroutineScope.launch {
+                    println("${Thread.currentThread().name}: onMoveRequest")
+                    state.value = currentState.makeMove(at)
+                }
+            },
         )
     }
 

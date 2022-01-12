@@ -259,7 +259,7 @@
 
 ### 12/01/2022 - Fixing the Tic-Tac-Toe application
 * Fixing the Tic-Tac-Toe application
-  1. Dispaching I/O to other threads using the corotines' programming model
+  1. Dispaching I/O to other threads using the coroutines' programming model
   2. Adding support for periodic refresh
 * Desktop Compose programming model, continued
   * Building blocks

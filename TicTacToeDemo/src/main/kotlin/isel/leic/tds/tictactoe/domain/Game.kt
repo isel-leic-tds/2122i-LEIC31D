@@ -1,6 +1,7 @@
 package isel.leic.tds.tictactoe.domain
 
 import isel.leic.tds.tictactoe.storage.GamesRepository
+import isel.leic.tds.tictactoe.storage.SharedGameState
 import isel.leic.tds.tictactoe.storage.toBoard
 import isel.leic.tds.tictactoe.storage.toSharedGameState
 import java.lang.IllegalStateException
@@ -24,8 +25,13 @@ object GameNotStarted : Game() {
      * @param localPlayer   the local player
      * @param gameId        the game identifier
      */
-    fun start(repository: GamesRepository, localPlayer: Player, gameId: GameId) =
-        GameStarted(repository, gameId, localPlayer, Board())
+    suspend fun start(repository: GamesRepository, localPlayer: Player, gameId: GameId): GameStarted {
+        val initialBoard = Board(turn = Player.CIRCLE)
+        val gameState = GameStarted(repository, gameId, localPlayer, initialBoard)
+        if (gameState.isLocalPlayerTurn())
+            repository.createGame(gameId.toString(), initialBoard.toSharedGameState())
+        return gameState
+    }
 }
 
 /**
@@ -53,7 +59,7 @@ data class GameStarted(
      * @return the new [GameStarted] instance
      * @throws IllegalStateException if it's not the local player turn to play
      */
-    fun makeMove(at: Coordinate) : GameStarted {
+    suspend fun makeMove(at: Coordinate) : GameStarted {
         val newState = copy(board = board.makeMove(at))
         repository.updateOngoingGame(id.toString(), newState.board.toSharedGameState())
         return newState
@@ -62,7 +68,7 @@ data class GameStarted(
     /**
      * Creates a new instance from the data published to the repository
      */
-    fun refresh(): GameStarted {
+    suspend fun refresh(): GameStarted {
         val game = repository.getOngoingGame(id.toString())
         return if (game != null) {
             copy(board = game.toBoard())
