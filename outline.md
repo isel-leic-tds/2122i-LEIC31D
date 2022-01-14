@@ -268,4 +268,11 @@
 * Kotlin language constructs:
   * [Qualified `this@` expressions](https://kotlinlang.org/docs/this-expressions.html)
 * For reference:    
-  * Video lecture (in Portuguese) (__coming soon__)
+  * [Video lecture (in Portuguese)](https://youtu.be/j6YlvcF_WdQ)
+
+## Week 14
+### 17/01/2021 - Laboratory 
+* Practical class dedicated to the course's project
+
+### 19/01/2021 - Laboratory 
+* Practical class dedicated to the course's project
