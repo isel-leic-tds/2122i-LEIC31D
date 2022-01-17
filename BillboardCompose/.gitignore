@@ -1,0 +1,6 @@
+# The following file should be excluded from the repo
+/tds-billboard.json
+/tds-billboard-test.json
+/.gradle/
+/build/
+/out/

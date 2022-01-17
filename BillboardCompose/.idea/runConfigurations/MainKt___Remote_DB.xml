@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MainKt - Remote DB" type="JetRunConfigurationType" singleton="false">
+    <envs>
+      <env name="MONGO_DB_NAME" value="tds_billboard" />
+      <env name="MONGO_DB_CONNECTION" value="mongodb+srv://billboard_user:billboard_secret@cluster0.dgfhs.mongodb.net/test" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="isel.leic.tds.MainKt" />
+    <module name="BillboardCompose.main" />
+    <shortenClasspath name="NONE" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
